@@ -4,7 +4,7 @@ import time
 
 
 class handDetector():
-    def __init__(self, mode=False, maxHands=2,modelC=1, detectionCon=0.5, trackCon=0.5):
+    def __init__(self, mode=False, maxHands=2, modelC=1, detectionCon=0.5, trackCon=0.5):
         self.mode = mode
         self.maxHands = maxHands
         self.modelC = modelC
@@ -16,25 +16,25 @@ class handDetector():
                                         self.detectionCon, self.trackCon)
         self.mpDraw = mp.solutions.drawing_utils
 
-    #It searches for hands in the frame, and produces landmarks that trace their movement
+    # It searches for hands in the frame, and produces landmarks that trace their movement
     def findHands(self, frame, draw=True):
 
         imgRGB = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-        #Processes the hands and returns the landmarks
-        results = self.hands.process(imgRGB)
+        # Processes the hands and returns the landmarks
+        self.results = self.hands.process(imgRGB)
 
-        #in results the multi_hand_landmarks field contains the ID and
-        #position of the landmarks found by the hands.process function
-        if results.multi_hand_landmarks:
-            for handLms in results.multi_hand_landmarks:
+        # in results the multi_hand_landmarks field contains the ID and
+        # position of the landmarks found by the hands.process function
+        if self.results.multi_hand_landmarks:
+            for handLms in self.results.multi_hand_landmarks:
                 if draw:
                     # Draw the landmarks
                     self.mpDraw.draw_landmarks(frame, handLms,
                                                self.mpHands.HAND_CONNECTIONS)
         return frame
 
-    #Saves the spatial positions of the landmarks and returns a list that
-    #associates the positions of the landmarks over time with each id
+    # Saves the spatial positions of the landmarks and returns a list that
+    # associates the positions of the landmarks over time with each id
     def findPosition(self, frame, handNo=0, draw=True):
 
         lmList = []
@@ -68,12 +68,12 @@ def main():
 
         frame = detector.findHands(frame)
 
-        lmList= detector.findPosition(frame)
+        lmList = detector.findPosition(frame)
         if len(lmList) != 0:
-            #the indices of the landmarks are shown in the Documentation folder
+            # the indices of the landmarks are shown in the Documentation folder
             print(lmList[4])
 
-        #Calculates and shows the framerate
+        # Calculates and shows the framerate
         cTime = time.time()
         fps = 1 / (cTime - pTime)
         pTime = cTime
