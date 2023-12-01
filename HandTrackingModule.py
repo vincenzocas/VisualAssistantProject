@@ -16,20 +16,39 @@ class handDetector():
                                         self.detectionCon, self.trackCon)
         self.mpDraw = mp.solutions.drawing_utils
 
+    #It searches for hands in the frame, and produces landmarks that trace their movement
     def findHands(self, frame, draw=True):
 
         imgRGB = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-        # processa le mani e ritorna le landmarks
+        #Processes the hands and returns the landmarks
         results = self.hands.process(imgRGB)
 
-        #in results il campo multi_hand_landmarks contiene id e posizione dei landmark trovati dalla funzione hands.process
+        #in results the multi_hand_landmarks field contains the ID and
+        #position of the landmarks found by the hands.process function
         if results.multi_hand_landmarks:
             for handLms in results.multi_hand_landmarks:
                 if draw:
-                    # Disegna i landmarks
+                    # Draw the landmarks
                     self.mpDraw.draw_landmarks(frame, handLms,
                                                self.mpHands.HAND_CONNECTIONS)
         return frame
+
+    #Saves the spatial positions of the landmarks and returns a list that
+    #associates the positions of the landmarks over time with each id
+    def findPosition(self, frame, handNo=0, draw=True):
+
+        lmList = []
+        if self.results.multi_hand_landmarks:
+            myHand = self.results.multi_hand_landmarks[handNo]
+            for id, lm in enumerate(myHand.landmark):
+
+                h, w, c = frame.shape
+                cx, cy = int(lm.x * w), int(lm.y * h)
+
+                lmList.append([id, cx, cy])
+                if draw:
+                    cv2.circle(frame, (cx, cy), 15, (255, 0, 255), cv2.FILLED)
+        return lmList
 
 
 def main():
@@ -48,6 +67,11 @@ def main():
         frame = cv2.flip(frame, 1)
 
         frame = detector.findHands(frame)
+
+        lmList= detector.findPosition(frame)
+        if len(lmList) != 0:
+            #the indices of the landmarks are shown in the Documentation folder
+            print(lmList[4])
 
         #Calculates and shows the framerate
         cTime = time.time()
