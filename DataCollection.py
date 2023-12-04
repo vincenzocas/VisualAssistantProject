@@ -3,6 +3,7 @@ import HandTrackingModule as HTM
 import numpy as np
 import cv2
 
+
 #path for exported data
 DATA_PATH = os.path.join('MP_data')
 
@@ -66,5 +67,6 @@ while cap.isOpened():
 
     cap.release()
     cv2.destroyAllWindows()
+
 cap.release()
 cv2.destroyAllWindows()

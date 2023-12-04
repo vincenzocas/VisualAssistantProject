@@ -48,9 +48,9 @@ class handDetector():
 
                 h, w, c = frame.shape
                 cx, cy, cz = int(lm.x * w), int(lm.y * h), lm.z
-                test = np.array([id, cx, cy, cz]).flatten()
+                test = np.array([cx, cy, cz]).flatten()
                 lmList.append(test)
-        else: lmList.append(np.zeros(21*3)) #if there aren't data to collect fill the list with 0 matrix
+        else: lmList.append(np.zeros(21*3)) #if there aren't data to collect fill the list with a 0 matrix
 
         print(lmList)
         np.save('0', lmList)

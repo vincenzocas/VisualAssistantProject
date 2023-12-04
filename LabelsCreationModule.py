@@ -2,24 +2,17 @@ from sklearn.model_selection import train_test_split
 from keras.utils import to_categorical
 import numpy as np
 import os
+import DataCollection as Dc
 
-#path for exported data
-DATA_PATH = os.path.join('MP_data')
 
-actions = np.array(['Activate'])
-
-#Lenght of sequence to record the action
-no_sequences = 30
-sequence_lenght = 30
-
-label_map = {label: num for num, label in enumerate(actions)}
+label_map = {label: num for num, label in enumerate(Dc.action)}
 
 sequences, labels = [], []
-for action in actions:
-    for sequence in range(no_sequences):
+for action in Dc.action:
+    for sequence in range(Dc.no_sequences):
         window = []
-        for frame_num in range(sequence_lenght):
-            res = np.load(os.path.join(DATA_PATH, action, str(sequence), "{}.npy".format(frame_num)))
+        for frame_num in range(Dc.sequence_lenght):
+            res = np.load(os.path.join(Dc.DATA_PATH, Dc.action, str(sequence), "{}.npy".format(frame_num)))
             window.append(res)
         sequences.append(window)
         labels.append(label_map[action])
