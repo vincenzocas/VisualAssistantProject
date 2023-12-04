@@ -53,9 +53,13 @@ class handDetector():
         else: lmList.append(np.zeros(21*3)) #if there aren't data to collect fill the list with 0 matrix
 
         print(lmList)
+        np.save('0', lmList)
+        np.load('0.npy')
         return lmList
 
-   # def collect_data(self, ):
+    def collect_data(self, lmList):
+        np.save('0', lmList)
+        np.load('0.npy')
 
 
 
