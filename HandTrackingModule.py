@@ -1,7 +1,9 @@
 import mediapipe as mp
 import cv2
 import time
-
+import os
+from matplotlib import pyplot as plt
+import numpy as np
 
 class handDetector():
     def __init__(self, mode=False, maxHands=2, modelC=1, detectionCon=0.5, trackCon=0.5):
@@ -20,9 +22,11 @@ class handDetector():
     def findHands(self, frame, draw=True):
 
         imgRGB = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+        imgRGB.flags.writeable = False
         # Processes the hands and returns the landmarks
         self.results = self.hands.process(imgRGB)
 
+        imgRGB.flags.writeable = True
         # in results the multi_hand_landmarks field contains the ID and
         # position of the landmarks found by the hands.process function
         if self.results.multi_hand_landmarks:
@@ -35,7 +39,7 @@ class handDetector():
 
     # Saves the spatial positions of the landmarks and returns a list that
     # associates the positions of the landmarks over time with each id
-    def findPosition(self, frame, handNo=0, draw=True):
+    def findPosition(self, frame, handNo=0, draw=False):
 
         lmList = []
         if self.results.multi_hand_landmarks:
@@ -43,12 +47,16 @@ class handDetector():
             for id, lm in enumerate(myHand.landmark):
 
                 h, w, c = frame.shape
-                cx, cy = int(lm.x * w), int(lm.y * h)
+                cx, cy, cz = int(lm.x * w), int(lm.y * h), lm.z
+                test = np.array([id, cx, cy, cz]).flatten()
+                lmList.append(test)
+        else: lmList.append(np.zeros(21*3)) #if there aren't data to collect fill the list with 0 matrix
 
-                lmList.append([id, cx, cy])
-                if draw:
-                    cv2.circle(frame, (cx, cy), 15, (255, 0, 255), cv2.FILLED)
+        print(lmList)
         return lmList
+
+   # def collect_data(self, ):
+
 
 
 def main():
@@ -59,7 +67,7 @@ def main():
     # init the camera
     cap = cv2.VideoCapture(0)
 
-    detector = handDetector(detectionCon=0.5)
+    detector =  handDetector(detectionCon=0.5)
     while True:
         # get the current frame
         success, frame = cap.read()
@@ -69,9 +77,7 @@ def main():
         frame = detector.findHands(frame)
 
         lmList = detector.findPosition(frame)
-        if len(lmList) != 0:
-            # the indices of the landmarks are shown in the Documentation folder
-            print(lmList[4])
+
 
         # Calculates and shows the framerate
         cTime = time.time()
