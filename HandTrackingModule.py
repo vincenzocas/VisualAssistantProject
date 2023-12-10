@@ -52,7 +52,7 @@ class handDetector():
                 lmList.append(test)
         else: lmList.append(np.zeros(21*3)) #if there aren't data to collect fill the list with a 0 matrix
 
-        print(lmList)
+        # print(lmList)
         np.save('0', lmList)
         np.load('0.npy')
         return lmList
@@ -92,7 +92,10 @@ def main():
                     (255, 0, 255), 3)
 
         cv2.imshow("Frame", frame)
-        cv2.waitKey(1)
+        #added functionality to close when pressing 'q'
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            break
+
 
 
 if __name__ == "__main__":
