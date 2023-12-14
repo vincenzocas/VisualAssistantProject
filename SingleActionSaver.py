@@ -54,11 +54,6 @@ if __name__ == '__main__':
 
     working_path = os.path.join(DATA_PATH, action_name, output)
 
-    try:
-        os.makedirs(working_path)
-    except:
-        pass
-
     repetitions = args.repetitions
     frames = args.time
 
