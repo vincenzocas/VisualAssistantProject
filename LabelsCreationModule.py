@@ -1,3 +1,5 @@
+import sys
+
 from sklearn.model_selection import train_test_split
 from keras.utils import to_categorical
 import numpy as np
@@ -16,6 +18,7 @@ for action in Dc.action:
             window.append(res)
         sequences.append(window)
         labels.append(label_map[action])
+
 
 #print(np.array(sequences).shape)
 #print(np.array(labels).shape)
