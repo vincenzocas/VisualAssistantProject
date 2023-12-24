@@ -109,7 +109,7 @@ if __name__ == '__main__':
                 break
             pass
 
-        if iteration == repetitions:
+        if iteration >= repetitions:
             print("Finished all iterations.\n")
             break
 
