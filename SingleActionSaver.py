@@ -54,7 +54,8 @@ if __name__ == '__main__':
 
     working_path = os.path.join(DATA_PATH, action_name, output)
 
-    repetitions = args.repetitions
+    repetitions = int(args.repetitions[0])
+
     frames = args.time
 
     # title of window
