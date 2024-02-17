@@ -3,12 +3,12 @@
 
 ### actions to implement (functionality):
 - [ ] activate
-- [ ] control volume
-- [ ] next/previous page
-- [ ] scroll up/down
-- [ ] minimize window
+- [x] control volume
+- [x] next/previous page
+- [x] scroll up/down
+- [x] minimize window
 - [ ] exit/stop the VA
-- [ ] tell time
+- [x] tell time
 #### <i>tasks:</i>
  - [ ] train NN
  - [ ] create NN gesture recognition function
