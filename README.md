@@ -14,7 +14,7 @@
  - [ ] create NN gesture recognition function
  - [ ] do switch with all available actions
 #### <i>fill training data:<i>
- -[ ] activate
+- [ ] activate
 - [ ] control volume
 - [ ] next/previous page
 - [ ] scroll up/down
