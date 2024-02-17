@@ -99,7 +99,7 @@ class VolumeManager:
                 # print(lengthBase, length, length/lengthBase)
 
                 # less than the lower bound for the threshold
-                if length < lengthBase * 0.15 or length < 10:
+                if length < lengthBase * 0.15 or length < 25:
                     color = (0, 255, 0)
                     self.lower_volume()
 
