@@ -1,10 +1,10 @@
 from Classes.actions import actions
 import pyttsx3
-
+from Classes.volumeManager import VolumeManager
 
 def take_queries():
+    volume_manager = VolumeManager()
     Hello()
-
     # while True:
     #     query = take_command().lower()
     #     # TODO: create switch statement to check actions that can be realized
@@ -47,10 +47,3 @@ def take_command() -> str:
     """
     return ""
 
-
-def raise_volume():
-    pass
-
-
-def lower_volume():
-    pass
