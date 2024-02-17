@@ -2,6 +2,7 @@ from Classes.actions import actions
 import pyttsx3
 from Classes.volumeManager import VolumeManager
 
+
 def take_queries():
     volume_manager = VolumeManager()
     Hello()
@@ -46,4 +47,3 @@ def take_command() -> str:
     :return: a str with the predicted command from the hand movements
     """
     return ""
-
