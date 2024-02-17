@@ -1,11 +1,12 @@
 from Classes.actions import actions
 import pyttsx3
+from Classes.volumeManager import VolumeManager
 from Classes.tellTime import tell_current_time
 
 def take_queries():
-
+    volume_manager = VolumeManager()
     Hello()
-    # tell_current_time()
+
     # while True:
     #     query = take_command().lower()
     #     # TODO: create switch statement to check actions that can be realized
@@ -47,11 +48,3 @@ def take_command() -> str:
     :return: a str with the predicted command from the hand movements
     """
     return ""
-
-
-def raise_volume():
-    pass
-
-
-def lower_volume():
-    pass
