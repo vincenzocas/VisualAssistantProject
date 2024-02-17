@@ -1,10 +1,11 @@
 from Classes.actions import actions
 import pyttsx3
-
+from Classes.tellTime import tell_current_time
 
 def take_queries():
-    Hello()
 
+    Hello()
+    # tell_current_time()
     # while True:
     #     query = take_command().lower()
     #     # TODO: create switch statement to check actions that can be realized
