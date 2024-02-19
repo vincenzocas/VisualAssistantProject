@@ -46,3 +46,8 @@ class Labeler:
         self.X_train, self.X_test, self.y_train, self.y_test = train_test_split(x, y, test_size=0.05)
         pass
     pass
+
+
+if __name__ == "__main__":
+    l = Labeler()
+    pass
