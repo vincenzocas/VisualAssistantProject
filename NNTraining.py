@@ -16,7 +16,7 @@ model.add(LSTM(64, return_sequences=True, activation='relu', input_shape=(30, 63
 model.add(LSTM(128, return_sequences=True, activation='relu'))
 model.add(LSTM(64, return_sequences=False, activation='relu'))
 model.add(Dense(64, activation='relu'))
-model.add(Dense(32, activator='relu'))
+model.add(Dense(32, activation='relu'))
 # the last layer gives us an array of probability whose sum is 1
 model.add(Dense(actions.shape[0], activation='softmax'))
 
