@@ -8,7 +8,7 @@ import cv2
 DATA_PATH = os.path.join('MP_data')
 
 #Action to collect
-actions = np.array(['Minimize','Next','Previous','ScrollDown','ScrollUp', 'Volume'])
+actions = np.array(['Minimize', 'Next', 'Previous', 'ScrollDown', 'ScrollUp', 'Volume'])
 
 #Lenght of sequence to record the action
 no_sequences = 30

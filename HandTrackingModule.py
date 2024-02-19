@@ -68,7 +68,7 @@ class handDetector():
                 test = [id, cx, cy]
                 lmList.append(test)
         else:
-            lmList.append(np.zeros(21 * 3))  # if there aren't data to collect fill the list with a 0 matrix
+            lmList.append(np.zeros((21 * 3)))  # if there aren't data to collect fill the list with a 0 matrix
         return lmList
 
 

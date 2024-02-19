@@ -20,29 +20,26 @@ if __name__ == '__main__':
     DATA_PATH = os.path.join('MP_data')
     list_actions = os.listdir(DATA_PATH)
 
+
     for action in list_actions:
-        print(action)
         dirPath = os.path.join(DATA_PATH, action, )
         # add action to label_map if it didn't exist beforehand
         label_map.setdefault(action, len(label_map.values()))
         sequences = get_sequences(dirPath)
-        # print(len(sequences))
+
         for sequence in sequences:
             window = []
-            frames = os.listdir(os.path.join(dirPath, sequence))
-            # print( f" { len(frames)}")
             for frame in os.listdir(os.path.join(dirPath, sequence)):
                 file = os.path.join(dirPath, sequence, frame)
-                # print(file)
+
                 if os.path.isfile(file):
                     res = np.load(file)
                     window.append(res)
-            # print(len(window))
             if len(window) > 0:
                 working_sequences.append(window)
                 labels.append(label_map[action])
 
-    x = np.array(working_sequences)
+    x = np.asarray(working_sequences)
     y = to_categorical(labels).astype(int)
 
-    # X_train, X_test, y_train, y_test = train_test_split(x, y, test_size=0.05)
+    X_train, X_test, y_train, y_test = train_test_split(x, y, test_size=0.05)
