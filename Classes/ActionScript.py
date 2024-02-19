@@ -2,11 +2,11 @@ from Classes.actions import actions
 import pyttsx3
 from Classes.volumeManager import VolumeManager
 from Classes.tellTime import tell_current_time
+from Classes.windowManager import minimizeOpenWindow
 
 def take_queries():
     volume_manager = VolumeManager()
     Hello()
-
     # while True:
     #     query = take_command().lower()
     #     # TODO: create switch statement to check actions that can be realized

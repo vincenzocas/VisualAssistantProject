@@ -57,6 +57,22 @@ class handDetector():
         np.load('0.npy')
         return lmList
 
+    def findPositionNoFlat(self, frame, handNo=0, draw=False):
+
+        lmList = []
+        if self.results.multi_hand_landmarks:
+            myHand = self.results.multi_hand_landmarks[handNo]
+            for id, lm in enumerate(myHand.landmark):
+                h, w, c = frame.shape
+                cx, cy = int(lm.x * w), int(lm.y * h)
+                test = [id, cx, cy]
+                lmList.append(test)
+        else:
+            lmList.append(np.zeros(21 * 3))  # if there aren't data to collect fill the list with a 0 matrix
+        return lmList
+
+
+
     def collect_data(self, lmList):
         np.save('0', lmList)
         np.load('0.npy')
