@@ -5,7 +5,7 @@ import os
 import LabelCreation2 as lb
 import numpy as np
 
-actions = np.array(['Minimize', 'Next', 'Previous', 'ScrollDown', 'ScrollUp', 'Volume'])
+actions = np.array(['Minimize', 'Next', 'Previous', 'ScrollDown', 'ScrollUp'])
 
 log_dir = os.path.join('Logs')
 tb_callback = TensorBoard(log_dir=log_dir)

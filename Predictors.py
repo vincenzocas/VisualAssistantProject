@@ -1,10 +1,12 @@
 from keras.models import Sequential
 import numpy as np
-import LabelsCreationModule as lb
-import NNTraining as nn
+
 import cv2
+from keras.src.layers import LSTM, Dense
+
 import HandTrackingModule as ht
 
+actions = np.array(['Minimize', 'Next', 'Previous', 'ScrollDown', 'ScrollUp'])
 
 colors = [(245, 117, 16), (117, 245, 16), (16, 117, 245)]
 
@@ -17,8 +19,19 @@ def prob_viz(res, actions, input_frame, colors):
     return output_frame
 
 
-
 model = Sequential()
+# 30 is the frame's number, 63 is the number of values, 3 for each hand landmark 21 * (x, y , z)
+model.add(LSTM(64, return_sequences=True, activation='relu', input_shape=(30, 63)))
+model.add(LSTM(128, return_sequences=True, activation='relu'))
+model.add(LSTM(64, return_sequences=False, activation='relu'))
+model.add(Dense(64, activation='relu'))
+model.add(Dense(32, activation='relu'))
+# the last layer gives us an array of probability whose sum is 1
+model.add(Dense(actions.shape[0], activation='softmax'))
+
+# Model Compile
+model.compile(optimizer='Adam', loss='categorical_crossentropy', metrics=['categorical_accuracy'])
+
 
 model.load_weights('TrainedModel.h5')
 
@@ -51,7 +64,7 @@ while True:
 
     if len(sequence) == 30:
         res = model.predict(np.expand_dims(sequence, axis=0))[0]
-        print(lb.action[np.argmax(res)])
+        print(actions[np.argmax(res)])
         predictions.append(np.argmax(res))
 
     #Visualization
@@ -60,18 +73,18 @@ while True:
             # if there are words in sentence, and check if the current prediction
             #isn't the same, in this case doesn't append to prevent duplication
             if len(sentence) > 0:
-                if lb.action[np.argmax(res)] != sentence[-1]:
-                    sentence.append(lb.action[np.argmax(res)])
+                if actions[np.argmax(res)] != sentence[-1]:
+                    sentence.append(actions[np.argmax(res)])
             #if there aren't words in sentence, append
             else:
-                sentence.append(lb.action[np.argmax(res)])
+                sentence.append(actions[np.argmax(res)])
 
 
     if len(sentence) > 5:
         sentence = sentence[-5:]
 
     #Viz probabilities
-    image = prob_viz(res, lb.action, frame, colors)
+    image = prob_viz(res, actions, frame, colors)
 
     cv2.rectangle(image, (0, 0), (640, 40), (245, 117, 16), -1)
     cv2.putText(image, ' '.join(sentence), (3, 30),
