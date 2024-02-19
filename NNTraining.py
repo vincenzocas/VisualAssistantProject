@@ -3,7 +3,7 @@ from keras.layers import LSTM, Dense
 from keras.callbacks import TensorBoard
 import os
 import DataCollection as dc
-import LabelsCreationModule as lb
+import LabelsCreation2 as lb
 
 log_dir = os.path.join('Logs')
 tb_callback = TensorBoard(log_dir = log_dir)
