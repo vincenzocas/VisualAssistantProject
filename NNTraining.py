@@ -24,4 +24,4 @@ model.compile(optimizer='Adam', loss='categorical_crossentropy', metrics=['categ
 model.fit(lb.X_train, lb.y_train, epochs = 2000, callbacks=[tb_callback])
 
 #Model save
-#model.save('TrainedModel.h5')
+model.save('TrainedModel.h5')
