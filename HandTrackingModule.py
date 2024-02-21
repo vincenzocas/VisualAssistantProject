@@ -49,12 +49,14 @@ class handDetector():
                 h, w, c = frame.shape
                 cx, cy, cz = int(lm.x * w), int(lm.y * h), lm.z
                 test = np.array([cx, cy, cz]).flatten()
-                lmList.append(test)
-        else: lmList.append(np.zeros(21*3)) #if there aren't data to collect fill the list with a 0 matrix
+                lmList.extend(test)
+            #print(np.shape(lmList))
+        else:
+            lmList = (np.zeros(21*3)) #if there aren't data to collect fill the list with a 0 matrix
+            #print(np.shape(lmList))
 
         # print(lmList)
-        np.save('0', lmList)
-        np.load('0.npy')
+
         return lmList
 
     def findPositionNoFlat(self, frame, handNo=0, draw=False):
@@ -80,6 +82,8 @@ class handDetector():
 
 
 def main():
+
+    sequence = []
     # FrameRate var
     pTime = 0
     cTime = 0
@@ -98,6 +102,12 @@ def main():
 
         lmList = detector.findPosition(frame)
 
+        print(np.shape(lmList))
+
+        sequence.append(lmList)
+        sequence = sequence[-30:]
+
+        print(np.shape(sequence))
 
         # Calculates and shows the framerate
         cTime = time.time()
