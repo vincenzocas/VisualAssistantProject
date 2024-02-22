@@ -64,7 +64,7 @@ if __name__ == '__main__':
     # starting variables
     iteration = 0
     cap = cv2.VideoCapture(0)
-    detector = HTM.handDetector(detectionCon=0.5)
+    detector = HTM.handDetector(detectionCon=0.75)
     capturing = False
     frame_n = 0
 
