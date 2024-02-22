@@ -29,7 +29,7 @@ def main():
     sequence = []
     sentence = []
     predictions = []
-    threshold = 0.7
+    threshold = 0.6
 
 
 
@@ -47,13 +47,13 @@ def main():
 
         lmList = detector.findPosition(frame)
 
-        print(np.shape(lmList))
+        #print(np.shape(lmList))
 
         #Prediction logic
         sequence.append( lmList)
         sequence = sequence[-30:]
 
-        print(np.shape(sequence))
+        #print(np.shape(sequence))
 
         if len(sequence) == 30:
             res = model.predict(np.expand_dims(sequence, axis=0))[0]
@@ -71,7 +71,8 @@ def main():
                     #if there aren't words in sentence, append
                     else:
                         sentence.append(actions[np.argmax(res)])
-
+                else:
+                    sentence.append("Nothing")
 
             if len(sentence) > 5:
                 sentence = sentence[-5:]
