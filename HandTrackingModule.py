@@ -75,6 +75,8 @@ class handDetector():
 
 
 
+
+
     def collect_data(self, lmList):
         np.save('0', lmList)
         np.load('0.npy')
