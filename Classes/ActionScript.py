@@ -6,6 +6,7 @@ from Classes.windowManager import minimizeOpenWindow
 from Classes.singleFramePredictor import take_command
 from Classes.MouseNKeyboard import KeyPressManager, scrollUp, scrollDown
 
+
 def take_queries():
     volume_manager = VolumeManager(0)
     kpm = KeyPressManager()
@@ -13,7 +14,6 @@ def take_queries():
     Hello()
     while True:
         query = take_command("./TrainedModel.h5").lower()
-
 
         if query == "minimize":
             minimizeOpenWindow()
@@ -74,4 +74,3 @@ def speak(dialogue: str):
     # queued commands
     engine.runAndWait()
     pass
-

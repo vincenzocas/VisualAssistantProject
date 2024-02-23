@@ -2,13 +2,15 @@ import mouse
 from pynput.keyboard import Key, Controller
 
 
+scrollSpeed = 1
+
 def scrollDown():
-    mouse.wheel(-1)
+    mouse.wheel(-scrollSpeed)
     pass
 
 
 def scrollUp():
-    mouse.wheel(1)
+    mouse.wheel(scrollSpeed)
     pass
 
 

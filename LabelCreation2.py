@@ -44,7 +44,8 @@ class Labeler:
         x = np.asarray(working_sequences)
         y = to_categorical(labels).astype(int)
 
-        self.X_train, self.X_test, self.y_train, self.y_test = train_test_split(x, y, test_size=0.25, shuffle=True, random_state=50)
+        self.X_train, self.X_test, self.y_train, self.y_test = train_test_split(x, y, test_size=0.25, shuffle=True,
+                                                                                random_state=50)
         pass
     pass
 
