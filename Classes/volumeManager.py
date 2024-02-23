@@ -12,7 +12,7 @@ class VolumeManager:
     volume_levels = 1  # (speed)
     volume_delta = 0.015 * volume_levels  # approx. #volume_levels points in percent
 
-    def __init__(self, videoCapId: int):
+    def __init__(self, videoCapId: int = 0):
         # init data to access the speakers
         self.devices = AudioUtilities.GetSpeakers()
         self.interface = self.devices.Activate(

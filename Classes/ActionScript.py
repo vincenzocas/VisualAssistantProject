@@ -3,14 +3,48 @@ import pyttsx3
 from Classes.volumeManager import VolumeManager
 from Classes.tellTime import tell_current_time
 from Classes.windowManager import minimizeOpenWindow
+from Classes.singleFramePredictor import take_command
+from Classes.MouseNKeyboard import KeyPressManager, scrollUp, scrollDown
 
 def take_queries():
-    volume_manager = VolumeManager()
+    volume_manager = VolumeManager(0)
+    kpm = KeyPressManager()
+
     Hello()
-    # while True:
-    #     query = take_command().lower()
-    #     # TODO: create switch statement to check actions that can be realized
-    #     pass
+    while True:
+        query = take_command("./TrainedModel.h5").lower()
+
+
+        if query == "minimize":
+            minimizeOpenWindow()
+            print(query)
+            pass
+        elif query == "scrollup":
+            scrollUp()
+            print(query)
+            pass
+        elif query == "scrolldown":
+            scrollDown()
+            print(query)
+            pass
+        elif query == "next":
+            kpm.nextPage()
+            print(query)
+            pass
+        elif query == "last":
+            kpm.lastPage()
+            print(query)
+            pass
+        elif query == "volume":
+            volume_manager.captureChangeVolume()
+            print(query)
+            pass
+        elif query == "exit":
+            print(query)
+            break
+            pass
+
+        pass
     pass
 
 
@@ -41,10 +75,3 @@ def speak(dialogue: str):
     engine.runAndWait()
     pass
 
-
-def take_command() -> str:
-    """
-    check what command to issue using the AI previously trained
-    :return: a str with the predicted command from the hand movements
-    """
-    return ""

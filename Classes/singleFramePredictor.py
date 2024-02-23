@@ -23,8 +23,9 @@ def prob_viz(res, actions, input_frame, colors):
     return output_frame
 
 
-def main():
-    model = load_model("./../TrainedModel.h5")
+def take_command(folder: str = "./../TrainedModel.h5"):
+
+    model = load_model(folder)
 
     # Detection vaiables
     sequence = []
@@ -46,8 +47,7 @@ def main():
         lmList = detector.findPosition(frame)
 
         # print(np.shape(lmList))
-        sequence = []
-        sequence.append(lmList)
+        sequence = [lmList]
 
         # if len(sequence) == 30:
         res = model.predict(np.expand_dims(sequence, axis=0))[0]
@@ -57,28 +57,33 @@ def main():
             predictions.append(actions[np.argmax(res)])
 
             # # Viz probabilities # we only visualize if there is an action with more probability than the threshold
-            frame = prob_viz(res, actions, frame, colors)
+            # frame = prob_viz(res, actions, frame, colors)
 
             # #after 15 frames of predictions it checks if there is one which occupied more than 12 frames
             if len(predictions) > frame_threshold:
+
                 counter = Counter(predictions)
-                # print(counter)
                 predictions.clear()
+
                 most = counter.most_common(1)[0]
+                # # most = (name , #of occurrences)
                 if most[1] >= frame_threshold * 0.8:
                     # #predicted action:
-                    print(most[0])
+                    cap.release()
+                    cv2.destroyAllWindows()
+                    return most[0]
                     pass
             pass
         pass
-        
-        cv2.imshow("Frame", frame)
+
+        # cv2.imshow("Frame", frame)
         # added functionality to close when pressing 'q'
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
     cap.release()
     cv2.destroyAllWindows()
+    return None
 
 
 if __name__ == "__main__":
-    main()
+    take_command()
