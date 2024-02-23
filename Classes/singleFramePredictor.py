@@ -3,7 +3,6 @@ import numpy as np
 from collections import deque, Counter
 
 import cv2
-from keras.src.layers import LSTM, Dense
 from NNTraining import actions
 
 import HandTrackingModule as ht
@@ -15,24 +14,22 @@ frame_height = 720
 colors = [(245, 117, 16), (117, 245, 16), (16, 117, 245), (116, 197, 205), (200, 100, 100)]
 
 
-def prob_viz(res, actions, input_frame, colors):
+def prob_viz(res, _actions, input_frame, _colors):
     output_frame = input_frame.copy()
     for num, prob in enumerate(res):
-        cv2.rectangle(output_frame, (0, 60 + num * 40), (int(prob * 100), 90 + num * 40), colors[num % len(colors)], -1)
-        if prob >0.5:
-            cv2.putText(output_frame, f"{actions[num]} {round(prob * 100, 2)}%", (0, 85 + num * 40), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2,
-                    cv2.LINE_AA)
+        cv2.rectangle(output_frame, (0, 60 + num * 40), (int(prob * 100), 90 + num * 40), _colors[num % len(colors)],
+                      -1)
+        if prob > 0.5:
+            cv2.putText(output_frame, f"{_actions[num]} {round(prob * 100, 2)}%", (0, 85 + num * 40),
+                        cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2, cv2.LINE_AA)
         else:
-          cv2.putText(output_frame, f"{actions[num]}  ", (0, 85 + num * 40), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2,
-                    cv2.LINE_AA)
+            cv2.putText(output_frame, f"{_actions[num]}  ", (0, 85 + num * 40), cv2.FONT_HERSHEY_SIMPLEX, 1,
+                        (255, 255, 255), 2, cv2.LINE_AA)
 
     return output_frame
 
 
-
-
 def take_command(folder: str = "./../TrainedModel.h5"):
-
     model = load_model(folder)
 
     # Detection vaiables
@@ -68,7 +65,6 @@ def take_command(folder: str = "./../TrainedModel.h5"):
 
             # # Viz probabilities # we only visualize if there is an action with more probability than the threshold
 
-
             # #after 15 frames of predictions it checks if there is one which occupied more than 12 frames
             if len(predictions) > frame_threshold:
 
@@ -79,9 +75,9 @@ def take_command(folder: str = "./../TrainedModel.h5"):
                 # # most = (name , #of occurrences)
                 if most[1] >= frame_threshold * 0.8:
                     # #predicted action:
-                    # cap.release()
-                    # cv2.destroyAllWindows()
-                    # return most[0]
+                    cap.release()
+                    cv2.destroyAllWindows()
+                    return most[0]
                     pass
             pass
         pass
