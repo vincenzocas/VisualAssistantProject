@@ -26,7 +26,7 @@ def main():
     model.compile(optimizer='Adam', loss='categorical_crossentropy', metrics=['categorical_accuracy'])
     # init labeler
     labeler = lb.Labeler()
-    model.fit(labeler.X_train, labeler.y_train, epochs=2000, callbacks=[tb_callback], validation_split=0.3,
+    model.fit(labeler.X_train, labeler.y_train, epochs=2000, callbacks=[tb_callback], validation_split=0.25,
               batch_size=20)
 
     # Model save
