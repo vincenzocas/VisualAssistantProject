@@ -17,8 +17,9 @@ def take_queries():
     while True:
         query, model = take_command("./TrainedModel.h5", model)
         if query is not None:
-            query= query.lower()
+            query = query.lower()
 
+        print(query)
         if query == "minimize":
             speak("minimizing window")
             minimizeOpenWindow()

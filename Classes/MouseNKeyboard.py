@@ -6,7 +6,7 @@ from collections import deque
 import cv2
 from NNTraining import actions
 import HandTrackingModule as ht
-from singleFramePredictor import prob_viz, colors
+# from singleFramePredictor import prob_viz, colors
 import DefaulBrowserDetect as db
 
 frame_threshold = 3
