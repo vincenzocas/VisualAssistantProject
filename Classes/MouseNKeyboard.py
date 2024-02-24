@@ -1,6 +1,6 @@
 import mouse
 from pynput.keyboard import Key, Controller
-
+import DefaulBrowserDetect as db
 
 scrollSpeed = 1
 
@@ -21,15 +21,61 @@ class KeyPressManager:
         pass
 
     def lastPage(self):
-        self.keyboard.press(Key.ctrl_l)
-        self.keyboard.press(Key.left)
-        self.keyboard.release(Key.left)
-        self.keyboard.release(Key.ctrl_l)
+        browser_id = db.get_default_browser_windows()
+        if browser_id == "FirefoxURL":
+            self.keyboard.press(Key.alt)
+            self.keyboard.press(Key.left)
+            self.keyboard.release(Key.left)
+            self.keyboard.release(Key.alt)
+            return
+        elif browser_id == "ChromeHTML":
+            self.keyboard.press(Key.alt)
+            self.keyboard.press(Key.left)
+            self.keyboard.release(Key.left)
+            self.keyboard.release(Key.alt)
+            return
+        elif browser_id == "AppXq0fevzme2pys62n3e0fbqa7peapykr8v":
+            self.keyboard.press(Key.alt)
+            self.keyboard.press(Key.left)
+            self.keyboard.release(Key.left)
+            self.keyboard.release(Key.alt)
+            return
+        elif browser_id == "OperaStable":
+            self.keyboard.press(Key.alt)
+            self.keyboard.press(Key.left)
+            self.keyboard.release(Key.left)
+            self.keyboard.release(Key.alt)
+            return
+        else:
+            return "Browser non riconosciuto"
         pass
 
     def nextPage(self):
-        self.keyboard.press(Key.ctrl_l)
-        self.keyboard.press(Key.right)
-        self.keyboard.release(Key.right)
-        self.keyboard.release(Key.ctrl_l)
+        browser_id = db.get_default_browser_windows()
+        if browser_id == "FirefoxURL":
+            self.keyboard.press(Key.alt)
+            self.keyboard.press(Key.right)
+            self.keyboard.release(Key.right)
+            self.keyboard.release(Key.alt)
+            return
+        elif browser_id == "ChromeHTML":
+            self.keyboard.press(Key.alt)
+            self.keyboard.press(Key.right)
+            self.keyboard.release(Key.right)
+            self.keyboard.release(Key.alt)
+            return
+        elif browser_id == "AppXq0fevzme2pys62n3e0fbqa7peapykr8v":
+            self.keyboard.press(Key.alt)
+            self.keyboard.press(Key.right)
+            self.keyboard.release(Key.right)
+            self.keyboard.release(Key.alt)
+            return
+        elif browser_id == "OperaStable":
+            self.keyboard.press(Key.alt)
+            self.keyboard.press(Key.right)
+            self.keyboard.release(Key.right)
+            self.keyboard.release(Key.alt)
+            return
+        else:
+            return "Browser non riconosciuto"
         pass

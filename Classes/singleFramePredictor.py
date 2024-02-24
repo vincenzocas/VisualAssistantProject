@@ -75,9 +75,9 @@ def take_command(folder: str = "./../TrainedModel.h5"):
                 # # most = (name , #of occurrences)
                 if most[1] >= frame_threshold * 0.8:
                     # #predicted action:
-                    cap.release()
-                    cv2.destroyAllWindows()
-                    return most[0]
+                    #cap.release()
+                    #cv2.destroyAllWindows()
+                    #return most[0]
                     pass
             pass
         pass
