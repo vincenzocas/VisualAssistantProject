@@ -4,7 +4,7 @@ from Classes.volumeManager import VolumeManager
 from Classes.tellTime import tell_current_time
 from Classes.windowManager import minimizeOpenWindow
 from Classes.singleFramePredictor import take_command
-from Classes.MouseNKeyboard import KeyPressManager, scrollUp, scrollDown
+from Classes.MouseNKeyboard import KeyPressManager, scrollUp, scrollDown, scroll
 
 
 def take_queries():
@@ -12,35 +12,46 @@ def take_queries():
     kpm = KeyPressManager()
 
     Hello()
+    query, model = take_command("./TrainedModel.h5", None).lower()
     while True:
-        query = take_command("./TrainedModel.h5").lower()
+        query, model = take_command("./TrainedModel.h5", model).lower()
 
         if query == "minimize":
+            speak("minimizing window")
             minimizeOpenWindow()
-            print(query)
+
+            # print(query)
             pass
         elif query == "scrollup":
+            speak("scrolling")
             scrollUp()
-            print(query)
+            scroll()
+            # print(query)
             pass
         elif query == "scrolldown":
+            speak("scrolling")
             scrollDown()
-            print(query)
+            scroll()
+            # print(query)
             pass
         elif query == "next":
+            speak("next page")
             kpm.nextPage()
-            print(query)
+            # print(query)
             pass
-        elif query == "last":
+        elif query == "previous":
+            speak("last page")
             kpm.lastPage()
-            print(query)
+            # print(query)
             pass
         elif query == "volume":
+            speak("adjusting volume")
             volume_manager.captureChangeVolume()
-            print(query)
+            # print(query)
             pass
         elif query == "exit":
-            print(query)
+            speak("Good bye User")
+            # print(query)
             break
             pass
 

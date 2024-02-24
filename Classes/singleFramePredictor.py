@@ -29,9 +29,9 @@ def prob_viz(res, _actions, input_frame, _colors):
     return output_frame
 
 
-def take_command(folder: str = "./../TrainedModel.h5"):
-    model = load_model(folder)
-
+def take_command(folder: str = "./../TrainedModel.h5", model = None):
+    if model is None:
+        model = load_model(folder)
     # Detection vaiables
     sequence = []
     sentence = []
@@ -58,7 +58,7 @@ def take_command(folder: str = "./../TrainedModel.h5"):
 
         # if len(sequence) == 30:
         res = model.predict(np.expand_dims(sequence, axis=0))[0]
-        frame = prob_viz(res, actions, frame, colors)
+        # frame = prob_viz(res, actions, frame, colors)
         if np.argmax(res) > threshold:
 
             predictions.append(actions[np.argmax(res)])
@@ -77,18 +77,18 @@ def take_command(folder: str = "./../TrainedModel.h5"):
                     # #predicted action:
                     cap.release()
                     cv2.destroyAllWindows()
-                    return most[0]
+                    return most[0], model
                     pass
             pass
         pass
 
-        cv2.imshow("Frame", frame)
+        # cv2.imshow("Frame", frame)
         # # added functionality to close when pressing 'q'
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
     cap.release()
     cv2.destroyAllWindows()
-    return None
+    return None, model
 
 
 if __name__ == "__main__":
