@@ -63,12 +63,10 @@ def take_command(folder: str = "./../TrainedModel.h5", model=None):
             print(actions[np.argmax(res)])
             predictions.append(actions[np.argmax(res)])
             # # Viz probabilities # we only visualize if there is an action with more probability than the threshold
-            # #after 15 frames of predictions it checks if there is one which occupied more than 12 frames
+            # #after #x frames of predictions it checks if there is one which occupied more than 80% frames
             if len(predictions) > frame_threshold:
-
                 counter = Counter(predictions)
                 predictions.clear()
-
                 most = counter.most_common(1)[0]
                 # # most = (name , #of occurrences)
                 if most[1] >= frame_threshold * 0.8:

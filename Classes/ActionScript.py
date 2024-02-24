@@ -21,26 +21,15 @@ def take_queries():
         if query == "minimize":
             speak("minimizing window")
             minimizeOpenWindow()
-
             # print(query)
             pass
-        elif query == "scrollup":
+        elif query == "scrollup" or query == "scrolldown":
             speak("scrolling")
-            scrollUp()
             scroll(model)
-
             speak("end of scrolling")
             # print(query)
             pass
-        elif query == "scrolldown":
-            speak("scrolling")
-            scrollDown()
-            scroll(model)
 
-            speak("end of scrolling")
-
-            # print(query)
-            pass
         elif query == "next":
             speak("next page")
             kpm.nextPage()
