@@ -10,10 +10,8 @@ from Classes.MouseNKeyboard import KeyPressManager, scrollUp, scrollDown, scroll
 def take_queries():
     volume_manager = VolumeManager(0)
     kpm = KeyPressManager()
-
-    Hello()
     query, model = take_command("./TrainedModel.h5", None)
-
+    Hello()
     while True:
         query, model = take_command("./TrainedModel.h5", model)
         if query is not None:

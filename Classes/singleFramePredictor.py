@@ -7,7 +7,7 @@ from NNTraining import actions
 
 import HandTrackingModule as ht
 
-frame_threshold = 15
+frame_threshold = 10
 frame_width = 1280
 frame_height = 720
 
@@ -29,7 +29,7 @@ def prob_viz(res, _actions, input_frame, _colors):
     return output_frame
 
 
-def take_command(folder: str = "./../TrainedModel.h5", model = None):
+def take_command(folder: str = "./../TrainedModel.h5", model=None):
     if model is None:
         model = load_model(folder)
     # Detection vaiables
@@ -61,8 +61,9 @@ def take_command(folder: str = "./../TrainedModel.h5", model = None):
         # frame = prob_viz(res, actions, frame, colors)
         if np.argmax(res) > threshold:
 
-            predictions.append(actions[np.argmax(res)])
-
+            if actions[np.argmax(res)] is not "Nothing":
+                predictions.append(actions[np.argmax(res)])
+                pass
             # # Viz probabilities # we only visualize if there is an action with more probability than the threshold
 
             # #after 15 frames of predictions it checks if there is one which occupied more than 12 frames
