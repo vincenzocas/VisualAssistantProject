@@ -1,7 +1,8 @@
 import mouse
 from pynput.keyboard import Key, Controller
 import numpy as np
-from collections import deque, Counter
+from keras.models import load_model
+from collections import deque
 import cv2
 from NNTraining import actions
 import HandTrackingModule as ht
@@ -32,6 +33,7 @@ def scroll(model):
 
     detector = ht.handDetector(detectionCon=0.75)
     timer = 0
+
     while True:
         # get the current frame
         success, frame = cap.read()
@@ -92,3 +94,8 @@ class KeyPressManager:
         self.keyboard.release(Key.right)
         self.keyboard.release(Key.ctrl_l)
         pass
+
+if __name__ == "__main__":
+    model = load_model("./../TrainedModel.h5")
+    scroll(model)
+    pass

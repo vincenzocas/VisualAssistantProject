@@ -12,9 +12,12 @@ def take_queries():
     kpm = KeyPressManager()
 
     Hello()
-    query, model = take_command("./TrainedModel.h5", None).lower()
+    query, model = take_command("./TrainedModel.h5", None)
+
     while True:
-        query, model = take_command("./TrainedModel.h5", model).lower()
+        query, model = take_command("./TrainedModel.h5", model)
+        if query is not None:
+            query= query.lower()
 
         if query == "minimize":
             speak("minimizing window")
@@ -25,13 +28,18 @@ def take_queries():
         elif query == "scrollup":
             speak("scrolling")
             scrollUp()
-            scroll()
+            scroll(model)
+
+            speak("end of scrolling")
             # print(query)
             pass
         elif query == "scrolldown":
             speak("scrolling")
             scrollDown()
-            scroll()
+            scroll(model)
+
+            speak("end of scrolling")
+
             # print(query)
             pass
         elif query == "next":
@@ -47,6 +55,9 @@ def take_queries():
         elif query == "volume":
             speak("adjusting volume")
             volume_manager.captureChangeVolume()
+
+            speak("Setting new volume")
+
             # print(query)
             pass
         elif query == "exit":
