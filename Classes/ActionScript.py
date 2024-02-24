@@ -13,11 +13,11 @@ def take_queries():
     model = load_model("./TrainedModel.h5")
     Hello()
     while True:
+        speak("checking for new command")
         query, _ = take_command("./TrainedModel.h5", model)
         if query is not None:
             query = query.lower()
 
-        print(query)
         if query == "minimize":
             speak("minimizing window")
             minimizeOpenWindow()
@@ -48,7 +48,7 @@ def take_queries():
 
             # print(query)
             pass
-        elif query == "exit":
+        elif query == "exit" or query is None:
             speak("Good bye User")
             # print(query)
             break
