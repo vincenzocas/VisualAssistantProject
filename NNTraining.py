@@ -5,7 +5,7 @@ import os
 import LabelCreation2 as lb
 import numpy as np
 
-actions = np.array(['Minimize', 'Next', 'Previous', 'ScrollDown', 'ScrollUp', 'volume']) #,'Exit'])
+actions = np.array(['Minimize', 'Next', "Nothing", 'Previous', 'ScrollDown', 'ScrollUp', 'volume']) #,'Exit'])
 
 
 def main():
