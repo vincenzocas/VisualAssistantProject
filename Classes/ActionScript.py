@@ -1,4 +1,4 @@
-from Classes.actions import actions
+from keras.models import load_model
 import pyttsx3
 from Classes.volumeManager import VolumeManager
 from Classes.tellTime import tell_current_time
@@ -10,10 +10,10 @@ from Classes.MouseNKeyboard import KeyPressManager, scrollUp, scrollDown, scroll
 def take_queries():
     volume_manager = VolumeManager(0)
     kpm = KeyPressManager()
-    query, model = take_command("./TrainedModel.h5", None)
+    model = load_model("./TrainedModel.h5")
     Hello()
     while True:
-        query, model = take_command("./TrainedModel.h5", model)
+        query, _ = take_command("./TrainedModel.h5", model)
         if query is not None:
             query = query.lower()
 

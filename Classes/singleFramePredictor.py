@@ -58,14 +58,11 @@ def take_command(folder: str = "./../TrainedModel.h5", model=None):
 
         # if len(sequence) == 30:
         res = model.predict(np.expand_dims(sequence, axis=0))[0]
-        # frame = prob_viz(res, actions, frame, colors)
-        if np.argmax(res) > threshold:
-
-            if actions[np.argmax(res)] is not "Nothing":
-                predictions.append(actions[np.argmax(res)])
-                pass
+        frame = prob_viz(res, actions, frame, colors)
+        if np.argmax(res) >= threshold and actions[np.argmax(res)] != "Nothing":
+            print(actions[np.argmax(res)])
+            predictions.append(actions[np.argmax(res)])
             # # Viz probabilities # we only visualize if there is an action with more probability than the threshold
-
             # #after 15 frames of predictions it checks if there is one which occupied more than 12 frames
             if len(predictions) > frame_threshold:
 
@@ -83,7 +80,7 @@ def take_command(folder: str = "./../TrainedModel.h5", model=None):
             pass
         pass
 
-        # cv2.imshow("Frame", frame)
+        cv2.imshow("Frame", frame)
         # # added functionality to close when pressing 'q'
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
