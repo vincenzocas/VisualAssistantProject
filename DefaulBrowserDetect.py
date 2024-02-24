@@ -6,4 +6,4 @@ def get_default_browser_windows():
         return value
 
 default_browser = get_default_browser_windows()
-print("Il browser predefinito su Windows è:", default_browser)
+# print("Il browser predefinito su Windows è:", default_browser)

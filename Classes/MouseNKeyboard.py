@@ -109,6 +109,10 @@ class KeyPressManager:
             self.keyboard.release(Key.alt)
             return
         else:
+            self.keyboard.press(Key.alt)
+            self.keyboard.press(Key.left)
+            self.keyboard.release(Key.left)
+            self.keyboard.release(Key.alt)
             return "Browser non riconosciuto"
         pass
 
