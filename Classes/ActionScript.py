@@ -22,7 +22,7 @@ def take_queries():
             query = query.lower()
 
         if query == "minimize":
-            # speak("minimizing window")
+            speak("minimizing window")
             n.notify(n.enumNotifications.Minimize)
             minimizeOpenWindow()
             # print(query)
@@ -32,7 +32,7 @@ def take_queries():
             n.notify(n.enumNotifications.ScrollS)
             scroll(model)
             n.notify(n.enumNotifications.ScrollF)
-            # speak("end of scrolling")
+            speak("end of scrolling")
             # print(query)
             pass
 
@@ -58,8 +58,8 @@ def take_queries():
             # print(query)
             pass
         elif query == "exit" or query is None:
-            speak("Good bye User")
-            # print(query)
+            speakAndWait("Good bye User")
+
             break
             pass
 
@@ -76,11 +76,11 @@ def Hello():
 
 
 def speak(dialogue: str):
-    threading.Thread(target=speak, args=(dialogue,)).start()
+    threading.Thread(target=speakAndWait, args=(dialogue,)).start()
     pass
 
 
-def speakFunction(dialogue: str):
+def speakAndWait(dialogue: str):
     """
     :param dialogue: the text to be read using text to speach
     :return: none
