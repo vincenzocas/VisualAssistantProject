@@ -14,6 +14,7 @@ class VolumeManager:
 
     def __init__(self, videoCapId: int = 0):
         # init data to access the speakers
+        self.cap = None
         self.devices = AudioUtilities.GetSpeakers()
         self.interface = self.devices.Activate(
             IAudioEndpointVolume._iid_, CLSCTX_ALL, None)
@@ -23,11 +24,10 @@ class VolumeManager:
         # init data for video capture
         if videoCapId is None:
             videoCapId = 0
-        self.cap = cv2.VideoCapture(videoCapId)
-
+        
+        self.videoCapId = videoCapId
         # init detector
         self.detector = htm.handDetector(detectionCon=0.7)
-        pass
 
     def change_volume(self, amount: float):
         self.volume.SetMasterVolumeLevel(amount, None)
@@ -71,6 +71,7 @@ class VolumeManager:
         pTime = 0
         x1, x2, y1, y2 = 0, 0, 0, 0
         noHandCounter = 0
+        self.cap = cv2.VideoCapture(self.videoCapId)
         while True:
             success, img = self.cap.read()
             # flip for preference
@@ -137,7 +138,8 @@ class VolumeManager:
             # if key == ord('q'):
             #     break
             # pass
-
+        self.cap.release()
+        cv2.destroyAllWindows()
         pass
 
     pass
