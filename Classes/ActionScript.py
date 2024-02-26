@@ -1,19 +1,18 @@
 from keras.models import load_model
 import pyttsx3
-from Classes.volumeManager import VolumeManager
-from Classes.tellTime import tell_current_time
+from Classes.NewVolumeChanger import VolumeManager
 from Classes.windowManager import minimizeOpenWindow
 from Classes.singleFramePredictor import take_command
-from Classes.MouseNKeyboard import KeyPressManager, scrollUp, scrollDown, scroll
+from Classes.MouseNKeyboard import KeyPressManager, scroll
 import Classes.Notifications as n
 
 def take_queries():
     volume_manager = VolumeManager(0)
     kpm = KeyPressManager()
     model = load_model("./TrainedModel.h5")
-    Hello()
     while True:
         #speak("checking for new command")
+        Hello()
         query, _ = take_command("./TrainedModel.h5", model)
         if query is not None:
             query = query.lower()
@@ -68,7 +67,7 @@ def Hello():
     """
     start up function to greet user
     """
-    speak("Hello user")
+    n.notify(n.enumNotifications.Ready)
     pass
 
 

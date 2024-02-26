@@ -1,7 +1,8 @@
 from win10toast import ToastNotifier
 from enum import Enum
 
-enumNotifications = Enum("NotificationsEnum", [("Previous", "Go Back to the previous page"),
+enumNotifications = Enum("NotificationsEnum", [("Ready", "Ready to capture"),
+                                               ("Previous", "Go Back to the previous page"),
                                                ("Next", "Go to the next page"),
                                                ("VolumeF", "Volume adjusted"),
                                                ("VolumeS", "Volume adjusting"),
@@ -11,7 +12,7 @@ enumNotifications = Enum("NotificationsEnum", [("Previous", "Go Back to the prev
 
 def notify(notification):
     toaster = ToastNotifier()
-    toaster.show_toast(notification.name, notification.value, duration=1)
+    toaster.show_toast(notification.name, notification.value, duration=0.4)
 
 
 if __name__ == "__main__":
