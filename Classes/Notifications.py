@@ -12,7 +12,7 @@ enumNotifications = Enum("NotificationsEnum", [("Ready", "Ready to capture"),
 
 def notify(notification):
     toaster = ToastNotifier()
-    toaster.show_toast(notification.name, notification.value, duration=0.4)
+    toaster.show_toast(notification.name, notification.value, duration=1)
 
 
 if __name__ == "__main__":
