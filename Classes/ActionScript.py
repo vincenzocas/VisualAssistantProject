@@ -1,16 +1,73 @@
-from Classes.actions import actions
+import os
+import threading
+
+from keras.models import load_model
 import pyttsx3
 from Classes.volumeManager import VolumeManager
 from Classes.tellTime import tell_current_time
 from Classes.windowManager import minimizeOpenWindow
+from Classes.singleFramePredictor import take_command
+from Classes.MouseNKeyboard import KeyPressManager, scrollUp, scrollDown, scroll
+import Classes.Notifications as n
+
 
 def take_queries():
-    volume_manager = VolumeManager()
+    volume_manager = VolumeManager(0)
+    kpm = KeyPressManager()
+    print("loading model")
+    print(os.listdir("./"))
+    model = load_model("./TrainedModel.h5")
+
     Hello()
-    # while True:
-    #     query = take_command().lower()
-    #     # TODO: create switch statement to check actions that can be realized
-    #     pass
+    while True:
+        # speak("checking for new command")
+        query, _ = take_command("./TrainedModel.h5", model)
+        if query is not None:
+            query = query.lower()
+
+        if query == "minimize":
+            speak("minimizing window")
+            n.notify(n.enumNotifications.Minimize)
+            minimizeOpenWindow()
+            # print(query)
+            pass
+        elif query == "scrollup" or query == "scrolldown":
+            speak("scrolling")
+            n.notify(n.enumNotifications.ScrollS)
+            scroll(model)
+            n.notify(n.enumNotifications.ScrollF)
+            speak("end of scrolling")
+            # print(query)
+            pass
+
+        elif query == "next":
+            speak("next page")
+            n.notify(n.enumNotifications.Next)
+            kpm.nextPage()
+            # print(query)
+            pass
+        elif query == "previous":
+            speak("last page")
+            n.notify(n.enumNotifications.Previous)
+            kpm.lastPage()
+            # print(query)
+            pass
+        elif query == "volume":
+            speak("adjusting volume")
+            n.notify(n.enumNotifications.VolumeS)
+            volume_manager.captureChangeVolume()
+            n.notify(n.enumNotifications.VolumeF)
+            # speak("Setting new volume")
+
+            # print(query)
+            pass
+        elif query == "exit" or query is None:
+            speakAndWait("Good bye User")
+
+            break
+            pass
+
+        pass
     pass
 
 
@@ -23,6 +80,11 @@ def Hello():
 
 
 def speak(dialogue: str):
+    threading.Thread(target=speakAndWait, args=(dialogue,)).start()
+    pass
+
+
+def speakAndWait(dialogue: str):
     """
     :param dialogue: the text to be read using text to speach
     :return: none
@@ -40,11 +102,3 @@ def speak(dialogue: str):
     # queued commands
     engine.runAndWait()
     pass
-
-
-def take_command() -> str:
-    """
-    check what command to issue using the AI previously trained
-    :return: a str with the predicted command from the hand movements
-    """
-    return ""

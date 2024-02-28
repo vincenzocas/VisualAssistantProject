@@ -6,7 +6,7 @@ from keras.src.layers import LSTM, Dense
 
 import HandTrackingModule as ht
 
-actions = np.array(['Minimize', 'Next', 'Previous', 'ScrollDown', 'ScrollUp'])
+actions = np.array(['Minimize', 'Next', 'Previous', 'ScrollDown', 'ScrollUp','Nothing'])
 
 colors = [(245, 117, 16), (117, 245, 16), (16, 117, 245), (116, 197, 205), (200, 100, 100)]
 
