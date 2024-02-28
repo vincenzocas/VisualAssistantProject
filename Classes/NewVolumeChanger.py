@@ -14,7 +14,8 @@ class VolumeManager:
         # init data for video capture
         if videoCapId is None:
             videoCapId = 0
-        self.cap = cv2.VideoCapture(videoCapId)
+        self.videoCapId = videoCapId
+
 
         # init detector
         self.detector = htm.handDetector(detectionCon=0.7)
@@ -40,10 +41,11 @@ class VolumeManager:
         :return:
         """
         pTime = 0
+        cap = cv2.VideoCapture(self.videoCapId)
         x1, x2, y1, y2 = 0, 0, 0, 0
         noHandCounter = 0
         while True:
-            success, img = self.cap.read()
+            success, img = cap.read()
             # flip for preference
             # img = cv2.flip(img, 1)
 
@@ -108,7 +110,9 @@ class VolumeManager:
             # if key == ord('q'):
             #     break
             # pass
-
+        cap.release()
+        cv2.destroyAllWindows()
         pass
+
 
     pass
