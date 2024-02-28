@@ -1,3 +1,4 @@
+import os
 import threading
 
 from keras.models import load_model
@@ -13,7 +14,10 @@ import Classes.Notifications as n
 def take_queries():
     volume_manager = VolumeManager(0)
     kpm = KeyPressManager()
+    print("loading model")
+    print(os.listdir("./"))
     model = load_model("./TrainedModel.h5")
+
     Hello()
     while True:
         # speak("checking for new command")
