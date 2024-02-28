@@ -21,8 +21,9 @@ def take_queries():
     model = load_model("./TrainedModel.h5")
     while True:
         #speak("checking for new command")
-        Hello()
+
         query, _ = take_command("./TrainedModel.h5", model)
+        Hello()
         if query is not None:
             query = query.lower()
 
