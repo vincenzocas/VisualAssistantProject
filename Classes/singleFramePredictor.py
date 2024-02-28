@@ -58,8 +58,10 @@ def take_command(folder: str = "./../TrainedModel.h5", model=None):
 
         # if len(sequence) == 30:
         res = model.predict(np.expand_dims(sequence, axis=0))[0]
+
         # frame = prob_viz(res, actions, frame, colors)
         # print(res)
+
 
         if np.max(res) >= threshold and actions[np.argmax(res)] != "Nothing":
             predictions.append(actions[np.argmax(res)])
@@ -79,7 +81,9 @@ def take_command(folder: str = "./../TrainedModel.h5", model=None):
             pass
         pass
 
+
         # cv2.imshow("Frame", frame)
+
         # # added functionality to close when pressing 'q'
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break

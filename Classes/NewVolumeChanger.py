@@ -1,10 +1,5 @@
 import math
-from comtypes import CLSCTX_ALL
-from pycaw.pycaw import AudioUtilities, IAudioEndpointVolume
-from ctypes import cast, POINTER
 import cv2
-import time
-import numpy as np
 import HandTrackingModule as htm
 import win32con
 import win32api
@@ -15,21 +10,15 @@ class VolumeManager:
     volume_delta = 0.015 * volume_levels  # approx. #volume_levels points in percent
 
     def __init__(self, videoCapId: int = 0):
-        # init data to access the speakers
-        self.cap = None
-        self.devices = AudioUtilities.GetSpeakers()
-        self.interface = self.devices.Activate(
-            IAudioEndpointVolume._iid_, CLSCTX_ALL, None)
-        # self.volume = cast(self.interface, POINTER(IAudioEndpointVolume))
-        self.volume = self.interface.QueryInterface(IAudioEndpointVolume)
 
         # init data for video capture
         if videoCapId is None:
             videoCapId = 0
-        
-        self.videoCapId = videoCapId
+        self.cap = cv2.VideoCapture(videoCapId)
+
         # init detector
         self.detector = htm.handDetector(detectionCon=0.7)
+        pass
 
 
     def raise_volume(self):
@@ -42,7 +31,7 @@ class VolumeManager:
 
         win32api.keybd_event(win32con.VK_VOLUME_DOWN, 0)
         win32api.keybd_event(win32con.VK_VOLUME_DOWN, 0, win32con.KEYEVENTF_KEYUP)
-        #self.change_volume(t)
+
         pass
 
     def captureChangeVolume(self):
@@ -53,7 +42,6 @@ class VolumeManager:
         pTime = 0
         x1, x2, y1, y2 = 0, 0, 0, 0
         noHandCounter = 0
-        self.cap = cv2.VideoCapture(self.videoCapId)
         while True:
             success, img = self.cap.read()
             # flip for preference
@@ -120,8 +108,7 @@ class VolumeManager:
             # if key == ord('q'):
             #     break
             # pass
-        self.cap.release()
-        cv2.destroyAllWindows()
+
         pass
 
     pass
