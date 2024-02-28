@@ -18,44 +18,40 @@ def take_queries():
             query = query.lower()
 
         if query == "minimize":
-            #speak("minimizing window")
+
             n.notify(n.enumNotifications.Minimize)
             minimizeOpenWindow()
-            # print(query)
+
             pass
         elif query == "scrollup" or query == "scrolldown":
-            #speak("scrolling")
+
             n.notify(n.enumNotifications.ScrollS)
             scroll(model)
             n.notify(n.enumNotifications.ScrollF)
-            #speak("end of scrolling")
-            # print(query)
+
             pass
 
         elif query == "next":
-            #speak("next page")
+
             n.notify(n.enumNotifications.Next)
             kpm.nextPage()
-            # print(query)
+
             pass
         elif query == "previous":
-            #speak("last page")
+
             n.notify(n.enumNotifications.Previous)
             kpm.lastPage()
-            # print(query)
+
             pass
         elif query == "volume":
-            #speak("adjusting volume")
+
             n.notify(n.enumNotifications.VolumeS)
             volume_manager.captureChangeVolume()
             n.notify(n.enumNotifications.VolumeF)
-            #speak("Setting new volume")
 
-            # print(query)
             pass
         elif query == "exit" or query is None:
-            #speak("Good bye User")
-            # print(query)
+
             break
             pass
 
