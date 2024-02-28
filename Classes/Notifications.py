@@ -1,13 +1,16 @@
 from win10toast import ToastNotifier
 from enum import Enum
 
-enumNotifications = Enum("NotificationsEnum", [("Previous", "Go Back to the previous page"),
+
+enumNotifications = Enum("NotificationsEnum", [("Ready", "Ready to capture"),
+                                               ("Previous", "Go Back to the previous page"),
                                                ("Next", "Go to the next page"),
                                                ("VolumeF", "Volume adjusted"),
                                                ("VolumeS", "Volume adjusting"),
                                                ("ScrollF", "Scroll performed"),
                                                ("ScrollS", "Scrolling"),
                                                ("Minimize", "Windows minimized")])
+
 
 
 def notify(notification):
@@ -20,6 +23,7 @@ def notify(notification):
     except:
         print("could not execute the toast")
         pass
+
 
 
 if __name__ == "__main__":
