@@ -17,7 +17,7 @@ import Classes.Notifications as n
 def take_queries():
     volume_manager = VolumeManager(0)
     kpm = KeyPressManager()
-
+    speak("Hello user")
     model = load_model("./TrainedModel.h5")
     while True:
         #speak("checking for new command")
@@ -27,13 +27,14 @@ def take_queries():
             query = query.lower()
 
         if query == "minimize":
-
+            speak("minimizing window")
             n.notify(n.enumNotifications.Minimize)
             minimizeOpenWindow()
 
+
             pass
         elif query == "scrollup" or query == "scrolldown":
-
+            speak("scrolling")
             n.notify(n.enumNotifications.ScrollS)
             scroll(model)
             n.notify(n.enumNotifications.ScrollF)
@@ -53,6 +54,7 @@ def take_queries():
 
             pass
         elif query == "volume":
+            speak("adjusting volume")
 
             n.notify(n.enumNotifications.VolumeS)
             volume_manager.captureChangeVolume()
@@ -60,7 +62,7 @@ def take_queries():
 
             pass
         elif query == "exit" or query is None:
-
+            speak("Good bye user")
             break
             pass
 
@@ -73,6 +75,7 @@ def Hello():
     start up function to greet user
     """
     n.notify(n.enumNotifications.Ready)
+
     pass
 
 
