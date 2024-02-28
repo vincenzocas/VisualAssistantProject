@@ -1,14 +1,23 @@
+
+
+import os
+import threading
+
+
 from keras.models import load_model
 import pyttsx3
 from Classes.NewVolumeChanger import VolumeManager
 from Classes.windowManager import minimizeOpenWindow
 from Classes.singleFramePredictor import take_command
+
 from Classes.MouseNKeyboard import KeyPressManager, scroll
 import Classes.Notifications as n
+
 
 def take_queries():
     volume_manager = VolumeManager(0)
     kpm = KeyPressManager()
+
     model = load_model("./TrainedModel.h5")
     while True:
         #speak("checking for new command")
@@ -68,6 +77,11 @@ def Hello():
 
 
 def speak(dialogue: str):
+    threading.Thread(target=speakAndWait, args=(dialogue,)).start()
+    pass
+
+
+def speakAndWait(dialogue: str):
     """
     :param dialogue: the text to be read using text to speach
     :return: none
