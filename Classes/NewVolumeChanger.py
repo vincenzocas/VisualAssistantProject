@@ -77,7 +77,7 @@ class VolumeManager:
                     self.lower_volume()
 
                 # more than the upper bound
-                elif length > lengthBase * 1.3:
+                elif length > lengthBase * 0.9:
                     color = (255, 0, 0)
                     self.raise_volume()
 

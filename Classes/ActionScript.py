@@ -20,8 +20,9 @@ def take_queries():
     speak("Hello user")
     model = load_model("./TrainedModel.h5")
     while True:
-        #speak("checking for new command")
+        speak("ready for next command")
         Hello()
+
         query, _ = take_command("./TrainedModel.h5", model)
 
         if query is not None:
