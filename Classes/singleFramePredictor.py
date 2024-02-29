@@ -62,7 +62,6 @@ def take_command(folder: str = "./../TrainedModel.h5", model=None):
         # frame = prob_viz(res, actions, frame, colors)
         # print(res)
 
-
         if np.max(res) >= threshold and actions[np.argmax(res)] != "Nothing":
             predictions.append(actions[np.argmax(res)])
             # # Viz probabilities # we only visualize if there is an action with more probability than the threshold
@@ -80,7 +79,6 @@ def take_command(folder: str = "./../TrainedModel.h5", model=None):
                     pass
             pass
         pass
-
 
         # cv2.imshow("Frame", frame)
 
