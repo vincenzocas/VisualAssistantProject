@@ -6,7 +6,8 @@ from enum import Enum
 # import plyer.platforms.win.notification
 # from plyer import notification as nt
 
-enumNotifications = Enum("NotificationsEnum", [("Ready", "Ready to capture"),
+enumNotifications = Enum("NotificationsEnum", [("Test", "testing notification"),
+                                               ("Ready", "Ready to capture"),
                                                ("Previous", "Go Back to the previous page"),
                                                ("Next", "Go to the next page"),
                                                ("VolumeF", "Volume adjusted"),

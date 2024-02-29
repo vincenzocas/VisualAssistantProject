@@ -2,7 +2,7 @@
 
 import os
 import threading
-
+import time
 
 from keras.models import load_model
 import pyttsx3
@@ -20,8 +20,8 @@ def take_queries():
     speak("Hello user")
     model = load_model("./TrainedModel.h5")
     while True:
+        n.notify(n.enumNotifications.Ready)
         speak("ready for next command")
-        Hello()
 
         query, _ = take_command("./TrainedModel.h5", model)
 
@@ -91,6 +91,9 @@ def speakAndWait(dialogue: str):
     :param dialogue: the text to be read using text to speach
     :return: none
     """
+
+    time.sleep(0.25)
+
     engine = pyttsx3.init()
     voices = engine.getProperty('voices')
     # setter method .[0]=male voice and
